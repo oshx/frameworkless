@@ -1,0 +1,25 @@
+{
+  "name": "frameworkless",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node sources"
+  },
+  "main": "sources",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oshx/frameworkless.git"
+  },
+  "author": {
+    "name": "오승환",
+    "email": "oshxios@gmail.com"
+  },
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/oshx/frameworkless/issues"
+  },
+  "homepage": "https://github.com/oshx/frameworkless#readme",
+  "engines": {
+    "npm": ">= 6"
+  }
+}
