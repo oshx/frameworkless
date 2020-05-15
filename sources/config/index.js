@@ -6,27 +6,41 @@ const MESSAGE = {
   invalid: '숫자로 A, B의 값을 모두 입력해주세요.',
 }
 
-const PATH = {
-  home: {
+const PATH_ORIGIN = [
+  {
     title: title(),
     path: '/',
+    controller: 'home',
   },
-  multiplication: {
+  {
     title: title('곱셈'),
     path: '/multiplication',
+    controller: 'multiplication',
   },
-  // factorial: {
+  // {
   //   title: title('제곱'),
   //   path: '/square',
+  //   controller: 'square',
   // },
-  // factorial: {
+  // {
   //   title: title('팩토리얼'),
   //   path: '/factorial',
+  //   controller: 'factorial',
   // },
-  // fibonacci: {
+  // {
   //   title: title('피보나치'),
-  //   controller: '/fibonacci',
+  //   path: '/fibonacci',
+  //   controller: 'fibonacci',
   // },
-}
+]
 
-module.exports = { PATH, MESSAGE }
+const PATH = ((list) => {
+  return list.reduce((acc, cur) => {
+    acc[cur.controller] = cur
+    acc[cur.path] = cur
+    return acc
+  }, {})
+})(PATH_ORIGIN)
+console.debug({ PATH })
+
+module.exports = { PATH, PATH_ORIGIN, MESSAGE }

@@ -1,4 +1,4 @@
-const { PATH } = require('@/config')
+const { PATH_ORIGIN } = require('@/config')
 
 const CSS = /*css*/ `
 * {
@@ -10,20 +10,17 @@ const CSS = /*css*/ `
 function navbar() {
   return /*html*/ `
   <div class="navbar">
-    ${Object.keys(PATH)
-      .map((controller) => {
-        const { path, title } = PATH[controller]
-        return /*html*/ `
+    ${PATH_ORIGIN.map((map) => {
+      const { path, title } = map
+      return /*html*/ `
       <p><a href="${path}">${title}</a></p>
       `
-      })
-      .join('')}
+    }).join('')}
   </div>
   `
 }
 
 function page(title, navbar, content = '') {
-  console.debug({ title })
   return /*html*/ `
   <!doctype html>
   <html lang="ko-KR">
@@ -37,7 +34,7 @@ function page(title, navbar, content = '') {
     <table>
       <tr>
         <td>${navbar}</td>
-        <td>${content}</td>
+        <td>${content || ''}</td>
       </tr>
     </table>
   <body>

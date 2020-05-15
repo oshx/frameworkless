@@ -5,16 +5,6 @@ const { PATH } = require('@/config')
 const PORT = 8696
 
 function application() {
-  const matchController = (request, response) => (controller) =>
-    request.requestURL.pathname === PATH[controller].path
-      ? require(`@/controllers/${controller}`)(request, response)
-      : null
-
-  const checkController = (request, response) => (controller) => {
-    console.info('[checkController]', PATH[controller])
-    return PATH[controller].path !== request.requestURL.pathname
-  }
-
   /**
    * @function Server
    * @param {Request & {requestURL: URL}} request 요청
@@ -23,14 +13,23 @@ function application() {
    */
   const Server = (request, response) => {
     param(request, response, undefined)
-    Object.keys(PATH).forEach(matchController(request, response))
-    if (Object.keys(PATH).every(checkController(request, response))) {
+    console.info(
+      `[${new Date()}] ${request.method} - ${request.requestURL.path} (${
+        !!PATH[request.requestURL.pathname]
+          ? PATH[request.requestURL.pathname].title
+          : '잘못된 요청'
+      })`,
+    )
+    const controller = PATH[request.requestURL.pathname]
+      ? PATH[request.requestURL.pathname].controller
+      : null
+    if (!controller) {
       response.status = 404
       return response.end('404!!')
     }
+    return require(`@/controllers/${controller}`)(request, response)
   }
 
-  console.info(PATH)
   const server = http.createServer(Server)
 
   server.listen(PORT)
