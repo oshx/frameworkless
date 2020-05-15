@@ -15,18 +15,18 @@ const PATH = {
     title: title('곱셈'),
     path: '/multiplication',
   },
-  factorial: {
-    title: title('제곱'),
-    path: '/square',
-  },
-  factorial: {
-    title: title('팩토리얼'),
-    path: '/factorial',
-  },
-  fibonacci: {
-    title: title('피보나치'),
-    controller: '/fibonacci',
-  },
+  // factorial: {
+  //   title: title('제곱'),
+  //   path: '/square',
+  // },
+  // factorial: {
+  //   title: title('팩토리얼'),
+  //   path: '/factorial',
+  // },
+  // fibonacci: {
+  //   title: title('피보나치'),
+  //   controller: '/fibonacci',
+  // },
 }
 
 module.exports = { PATH, MESSAGE }

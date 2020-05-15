@@ -37,6 +37,9 @@ function application() {
   console.info(`listen to http://localhost:${PORT}`)
 }
 
+/**
+ * 영원히 죽지 않는 process
+ */
 process.on('uncaughtException', (e) => {
   console.error('[ERROR]', e)
   application()
