@@ -1,4 +1,4 @@
-const { PATH_ORIGIN } = require('@/config')
+const { PATH } = require('@/config')
 
 const CSS = /*css*/ `
 * {
@@ -10,10 +10,10 @@ const CSS = /*css*/ `
 function navbar() {
   return /*html*/ `
   <div class="navbar">
-    ${PATH_ORIGIN.map((map) => {
-      const { path, title } = map
+    ${PATH.map((map) => {
+      const { path, menuName } = map
       return /*html*/ `
-      <p><a href="${path}">${title}</a></p>
+      <p><a href="${path}">${menuName}</a></p>
       `
     }).join('')}
   </div>

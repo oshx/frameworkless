@@ -1,46 +1,48 @@
 const APP_NAME = '수학 마법사'
-const title = (serviceName) =>
-  serviceName ? `${serviceName} - ${APP_NAME}` : APP_NAME
 
 const MESSAGE = {
-  invalid: '숫자로 A, B의 값을 모두 입력해주세요.',
+  invalid: '숫자로 값을 입력해주세요.',
 }
 
-const PATH_ORIGIN = [
+const toPath = (result, { title, path = '/', controller }) => {
+  const pathItem = {
+    title: title ? `${title} - ${APP_NAME}` : APP_NAME,
+    menuName: title ? title : null,
+    controller,
+    path,
+  }
+  result.push(pathItem)
+  result[controller] = pathItem
+  result[path] = pathItem
+  return result
+}
+
+const PATH = [
   {
-    title: title(),
+    title: '시작',
     path: '/',
     controller: 'home',
   },
   {
-    title: title('곱셈'),
+    title: '곱셈',
     path: '/multiplication',
     controller: 'multiplication',
   },
-  // {
-  //   title: title('제곱'),
-  //   path: '/square',
-  //   controller: 'square',
-  // },
-  // {
-  //   title: title('팩토리얼'),
-  //   path: '/factorial',
-  //   controller: 'factorial',
-  // },
-  // {
-  //   title: title('피보나치'),
-  //   path: '/fibonacci',
-  //   controller: 'fibonacci',
-  // },
-]
+  {
+    title: '제곱',
+    path: '/square',
+    controller: 'square',
+  },
+  {
+    title: '팩토리얼',
+    path: '/factorial',
+    controller: 'factorial',
+  },
+  {
+    title: '피보나치',
+    path: '/fibonacci',
+    controller: 'fibonacci',
+  },
+].reduce(toPath, [])
 
-const PATH = ((list) => {
-  return list.reduce((acc, cur) => {
-    acc[cur.controller] = cur
-    acc[cur.path] = cur
-    return acc
-  }, {})
-})(PATH_ORIGIN)
-console.debug({ PATH })
-
-module.exports = { PATH, PATH_ORIGIN, MESSAGE }
+module.exports = { PATH, MESSAGE }
